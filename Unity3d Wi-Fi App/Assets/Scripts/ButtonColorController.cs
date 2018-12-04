@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class ButtonColorController : MonoBehaviour {
 
     Image button;
+    private Color color;
+    public IPController ipController;
+    public int index;
+   
 
     public bool activity = true;
 
@@ -35,27 +39,33 @@ public class ButtonColorController : MonoBehaviour {
     void ActiveButton()
     {
 
-        button.color = Color.white;
-
-    }
+        ColorUtility.TryParseHtmlString("#09FF0064", out color);
+        button.GetComponent<Image>().color = color;     
+}
     void DisableButton()
     {
-
-        button.color = Color.red;
+        
+        ColorUtility.TryParseHtmlString("#FF6C6C", out color);
+        button.GetComponent<Image>().color = color;
+       
 
     }
     public void ChooseActivity()
     {
+        ipController.sendRequestToIP = true;
 
-        if (activity)
+        if (ipController.state[index] == true)
         {
-            activity = false;
+
+            ipController.state[index] = false;
+
         }
         else
         {
-            activity = true;
+            ipController.state[index] = true;
         }
 
+      
 
-    }
+}
 }
