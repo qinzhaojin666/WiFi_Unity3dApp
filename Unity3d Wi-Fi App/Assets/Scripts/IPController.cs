@@ -98,7 +98,7 @@ public class IPController : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
                
-                    animator.Play("FatalError");
+                    //animator.Play("FatalError");
                 
             }
             else
@@ -126,7 +126,7 @@ public class IPController : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
                
-                    animator.Play("FatalError");
+                   // animator.Play("FatalError");
                     startApp = false;
                 
 
@@ -156,7 +156,7 @@ public class IPController : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
 
-                animator.Play("FatalError");
+               // animator.Play("FatalError");
                 startApp = false;
 
 
@@ -186,7 +186,7 @@ public class IPController : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
 
-                animator.Play("FatalError");
+               // animator.Play("FatalError");
                 startApp = false;
 
 
@@ -216,7 +216,7 @@ public class IPController : MonoBehaviour
             if (www.isNetworkError || www.isHttpError)
             {
 
-                animator.Play("FatalError");
+                //animator.Play("FatalError");
                 startApp = false;
 
 
@@ -447,7 +447,8 @@ public class IPController : MonoBehaviour
 
     public void StartButton()
     {
-        StartCoroutine(StartState());
+        //StartCoroutine(StartState());
+        StartCoroutine(GettingState());
     }
     public void StopButton()
     {
