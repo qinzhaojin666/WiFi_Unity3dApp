@@ -36,6 +36,10 @@ public class IPController : MonoBehaviour
     public ButtonColorController button8;
     public ButtonColorController button9;
 
+    private void Start()
+    {
+        addressIPObj.text = "192.168.1.1";
+    }
     void Update()
     {
         if (startApp)
@@ -82,7 +86,7 @@ public class IPController : MonoBehaviour
     {
 
         ipAddress = addressIPObj.text;
-        startApp = true;
+        //startApp = true;
     }
 
  
@@ -127,7 +131,7 @@ public class IPController : MonoBehaviour
             {
                
                    // animator.Play("FatalError");
-                    startApp = false;
+                    //startApp = false;
                 
 
             }
@@ -157,7 +161,7 @@ public class IPController : MonoBehaviour
             {
 
                // animator.Play("FatalError");
-                startApp = false;
+                //startApp = false;
 
 
             }
@@ -187,7 +191,7 @@ public class IPController : MonoBehaviour
             {
 
                // animator.Play("FatalError");
-                startApp = false;
+               // startApp = false;
 
 
             }
@@ -217,7 +221,7 @@ public class IPController : MonoBehaviour
             {
 
                 //animator.Play("FatalError");
-                startApp = false;
+                //startApp = false;
 
 
             }
@@ -448,7 +452,8 @@ public class IPController : MonoBehaviour
     public void StartButton()
     {
         //StartCoroutine(StartState());
-        StartCoroutine(GettingState());
+        //StartCoroutine(GettingState());
+        startApp = true;
     }
     public void StopButton()
     {
