@@ -27,42 +27,56 @@ public class ButtonColorController : MonoBehaviour {
         if (activity)
         {
             ActiveButton();
+            
         }
+        
         else
         {
             DisableButton();
+            
+            
+            
         }
-
-
     }
+
+
+    
 
     void ActiveButton()
     {
 
         ColorUtility.TryParseHtmlString("#09FF0064", out color);
-        button.GetComponent<Image>().color = color;     
+        button.GetComponent<Image>().color = color;
+       
 }
     void DisableButton()
     {
         
         ColorUtility.TryParseHtmlString("#FF6C6C", out color);
         button.GetComponent<Image>().color = color;
-       
+        
 
     }
     public void ChooseActivity()
     {
+        //int i = 0;
+
+   
+      
         ipController.sendRequestToIP = true;
 
         if (ipController.state[index] == true)
         {
 
             ipController.state[index] = false;
-
+            ipController.red.Play();
+            ipController.youWin--;
         }
         else
         {
             ipController.state[index] = true;
+            ipController.green.Play();
+            ipController.youWin++;
         }
 
       

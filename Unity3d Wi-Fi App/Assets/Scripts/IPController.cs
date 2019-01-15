@@ -8,20 +8,18 @@ using UnityEngine.UI;
 
 public class IPController : MonoBehaviour
 {
+    public AudioSource bgsound;
+    public AudioSource green;
+    public AudioSource red;
+    public GameObject win;
+
     public bool[] state = new bool[9];
-
     public InputField addressIPObj;
-
     string ipAddress;
-
-    public float delay = 1.0f;
-
+    public float delay = 0.2f;
     public bool startApp = false;
-
     private int key1 = 0, key2 = 0, key3 = 0, key4 = 0, key5 = 0, key6 = 0, key7 = 0, key8 = 0, key9 = 0;
-
     public string intArray;
-
     public bool sendRequestToIP = false;
 
     public Animator animator;
@@ -36,12 +34,31 @@ public class IPController : MonoBehaviour
     public ButtonColorController button8;
     public ButtonColorController button9;
 
+    public bool soundCheckerGreen = false;
+    public bool soundCheckerRed = false;
+
+    public int youWin = 0;
+
+
+
     private void Start()
     {
         addressIPObj.text = "192.168.1.1";
     }
     void Update()
     {
+
+        if (youWin == 9 )
+        {
+            win.SetActive(true);
+            bgsound.Stop();
+           
+
+
+        }
+
+    
+
         if (startApp)
         {
             if (delay >= 0f)
@@ -120,7 +137,7 @@ public class IPController : MonoBehaviour
     IEnumerator SendingState()
     {
         
-        using (UnityWebRequest www = UnityWebRequest.Get("http://" + ipAddress + "/set" + intArray))
+        using (UnityWebRequest www = UnityWebRequest.Get("http://" + ipAddress + "/set?value=" + intArray))
         {
 
 #pragma warning disable CS0618
@@ -143,6 +160,7 @@ public class IPController : MonoBehaviour
                 //Debug.Log(state);
 
                 byte[] results = www.downloadHandler.data;
+                
             }
         }
     }
@@ -210,7 +228,7 @@ public class IPController : MonoBehaviour
     IEnumerator RebootState()
     {
 
-        using (UnityWebRequest www = UnityWebRequest.Get("http://" + ipAddress + "/set 000000000"))
+        using (UnityWebRequest www = UnityWebRequest.Get("http://" + ipAddress + "/reset"))
         {
 
 #pragma warning disable CS0618
@@ -248,100 +266,109 @@ public class IPController : MonoBehaviour
         if (state[0] == true)
         {
             key1 = 1;
-
+           
         }
         else
         {
 
             key1 = 0;
+           
         }
         // 2 element
         if (state[1] == true)
         {
             key2 = 1;
-
+           
         }
         else
         {
-
+        
             key2 = 0;
+            
         }
         // 3 element
         if (state[2] == true)
         {
             key3 = 1;
-
+            
         }
         else
         {
 
             key3 = 0;
+            
         }
         // 4 element
         if (state[3] == true)
         {
             key4 = 1;
-
+            
         }
         else
         {
 
             key4 = 0;
+            
         }
         // 5 element
         if (state[4] == true)
         {
             key5 = 1;
-
+           
         }
         else
         {
 
             key5 = 0;
+           
         }
         // 6 element
         if (state[5] == true)
         {
             key6 = 1;
-
+            
         }
         else
         {
 
             key6 = 0;
+            
         }
         // 7 element
         if (state[6] == true)
         {
             key7 = 1;
-
+            
         }
         else
         {
 
             key7 = 0;
+            
         }
         // 8 element
         if (state[7] == true)
         {
             key8 = 1;
-
+            
         }
         else
         {
 
             key8 = 0;
+           
         }
         // 9 element
         if (state[8] == true)
         {
             key9 = 1;
-
+            
         }
         else
         {
 
             key9 = 0;
+           
         }
 
     }
@@ -352,7 +379,7 @@ public class IPController : MonoBehaviour
         if (key1 == 1)
         {
             button1.activity = true;
-
+            
         }
         if (key1 == 0)
         {
@@ -454,12 +481,18 @@ public class IPController : MonoBehaviour
         //StartCoroutine(StartState());
         //StartCoroutine(GettingState());
         startApp = true;
+        bgsound.Play();
     }
     public void StopButton()
     {
         StartCoroutine(StopState());
-    }
-    public void RebootButton()
+        bgsound.Stop();
+        green.Stop();
+        red.Stop();
+       
+
+}
+public void RebootButton()
     {
         StartCoroutine(RebootState());
     }
